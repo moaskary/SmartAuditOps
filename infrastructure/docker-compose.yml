@@ -1,5 +1,15 @@
-# infrastructure/docker-compose.yml
 services:
+  db: 
+    image: postgres:15-alpine 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ 
+    environment:
+      - POSTGRES_USER=smartaudit
+      - POSTGRES_PASSWORD=supersecret
+      - POSTGRES_DB=smartauditops
+    ports:
+      - "5432:5432"
+
   backend:
     build:
       context: ..
@@ -12,12 +22,19 @@ services:
       - ~/.cache/huggingface:/root/.cache/huggingface
     environment:
       - PYTHONPATH=/app
+      - DATABASE_URL=postgresql://smartaudit:supersecret@db/smartauditops
+    depends_on:
+      - db 
 
   frontend:
     build:
-      context: .. 
+      context: ..
       dockerfile: frontend/Dockerfile
     ports:
       - "8080:80"
     depends_on:
-      - backend 
+      - backend
+
+
+volumes:
+  postgres_data:

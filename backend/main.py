@@ -1,7 +1,11 @@
-# backend/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  # 1. IMPORT the middleware
 from backend.routes import audit
+
+from . import database
+from .models import audit as audit_model
+
+database.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(
     title="SmartAuditOps API",

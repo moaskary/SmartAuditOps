@@ -5,3 +5,5 @@ python-multipart
 transformers
 torch
 sentencepiece
+SQLALchemy
+psycopg2-binary # posgreSQL driver
