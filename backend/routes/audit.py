@@ -1,7 +1,9 @@
+from typing import List
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from .. import database, models
+from .. import database, models, schemas
+
 
 # Import our AI analysis function
 from huggingface_tasks.classify_text import analyze_code_snippet
@@ -23,6 +25,14 @@ def get_db():
 class CodeSnippet(BaseModel):
     snippet: str
     language: str | None = None # Optional language field
+
+@router.get("/", response_model=List[schemas.AuditResultResponse])
+def get_all_audits(db: Session = Depends(get_db)):
+    """
+    Retrieves all audit results from the database.
+    """
+    audits = db.query(models.audit.AuditResult).order_by(models.audit.AuditResult.timestamp.desc()).all()
+    return audits
 
 @router.post("/code")
 def audit_code_snippet(payload: CodeSnippet, db: Session = Depends(get_db)):

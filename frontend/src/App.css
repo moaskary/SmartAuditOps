@@ -94,3 +94,45 @@ h2 { color: #34495e; }
   border-radius: 10px;
   transition: width 0.5s ease-in-out;
 }
+
+
+.main-nav {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+.main-nav a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.main-nav a:hover {
+  background-color: #f0f0f0;
+}
+
+/* frontend/src/App.css */
+.chart-container {
+    margin-bottom: 3rem;
+}
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.audit-table th, .audit-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.audit-table th {
+  background-color: #f2f2f2;
+}
+.audit-table pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
