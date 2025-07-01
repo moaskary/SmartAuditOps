@@ -1,0 +1,35 @@
+# .github/workflows/code_audit.yml
+name: SmartAuditOps CI
+
+# Trigger this workflow on pull requests targeting the 'main' branch
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  code-security-audit:
+    runs-on: ubuntu-latest # Use a standard Linux runner
+
+    steps:
+      # Step 1: Check out the code from the PR
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # We need to fetch the full history to compare against the main branch
+          fetch-depth: 0 
+
+      # Step 2: Set up Python environment
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Step 3: Install necessary Python packages
+      # We can reuse the requirements file from our backend
+      - name: Install dependencies
+        run: |
+          pip install --no-cache-dir -r backend/requirements.txt
+
+      # Step 4: Run our audit script
+      - name: Run SmartAuditOps Analysis
+        run: python scripts/run_pr_audit.py
