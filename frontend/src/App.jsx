@@ -1,7 +1,7 @@
-// frontend/src/App.jsx
+
 import { useState } from 'react';
 import axios from 'axios';
-import './App.css'; // We'll add some basic styles here later
+import './App.css'; 
 
 function App() {
   const [snippet, setSnippet] = useState('');
@@ -20,12 +20,11 @@ function App() {
     setResults(null);
 
     try {
-      // The URL for our backend endpoint, running on port 8000
-      const API_URL = 'http://localhost:8000/audit/code';
+      const API_URL = '/api/audit/code';
       
       const response = await axios.post(API_URL, {
         snippet: snippet,
-        language: 'python' // We can make this dynamic later
+        language: 'python' 
       });
       
       setResults(response.data.results.analysis);

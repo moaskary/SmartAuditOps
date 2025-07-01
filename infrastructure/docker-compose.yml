@@ -12,3 +12,12 @@ services:
       - ~/.cache/huggingface:/root/.cache/huggingface
     environment:
       - PYTHONPATH=/app
+
+  frontend:
+    build:
+      context: .. 
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend 
