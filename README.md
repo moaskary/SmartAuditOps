@@ -88,7 +88,6 @@ smartauditops/
 
 ---
 
-## 📄 Sample `README.md`
 ```markdown
 # SmartAuditOps 🚀
 
@@ -115,40 +114,3 @@ git clone https://github.com/moaskary/smartauditops.git
 cd smartauditops
 make up        # Runs backend + frontend in Docker
 ```
-
-## 🚀 Deployment
-- `terraform apply` to provision AWS infrastructure
-- Set environment variables
-- Push to `main` triggers CI/CD pipeline
-
-## 📜 License
-MIT
-```
-
----
-
-## 🧭 Architecture Diagram
-
-```
-Developer PR → GitHub → GitHub Actions → FastAPI Audit Service
-                                             ├── Hugging Face Inference
-                                             ├── Screenshot Analyzer (ImageSeg)
-                                             └── Compliance Checker (DocQA)
-
-FastAPI → PostgreSQL (Store Results)
-         → Redis (Job Queue)
-         → S3 (Reports, Screenshots)
-
-Dashboard ← React ← REST API ← FastAPI
-```
-
----
-
-## 📈 Optional Enhancements
-- Slack/Teams bot integration for real-time alerts
-- Jira issue creation from high-risk PRs
-- Historical audit comparison module
-- Self-hosted Hugging Face model support
-
----
-
